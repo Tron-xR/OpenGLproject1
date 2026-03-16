@@ -27,30 +27,25 @@ int main() {
 		return -1;
 	}
 
-	while (!glfwWindowShouldClose(window)) {
-		processInput(window);
-
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-
-
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-	}
-
-	glViewport(0, 0, 800, 600);
+	// Set viewport and callback before the render loop
+	glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-	while (!glfwWindowShouldClose(window)) {
+	// Set clear color to red (persistent until changed)
+	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+
+		while (!glfwWindowShouldClose(window)) {
+		processInput(window);
+
+		// Clear the color buffer (this fills the window with the clear color)
+		glClear(GL_COLOR_BUFFER_BIT);
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
-	float vertices[] = {
-		-0.5f, -0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
-		 0.0f,  0.5f, 0.0f
-	};
+	glfwTerminate();
+	return 0;
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -61,7 +56,4 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 void processInput(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
-
-	
 }
-
