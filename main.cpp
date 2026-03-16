@@ -38,10 +38,16 @@ int main() {
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	// Set clear color to red (persistent until changed)
-	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.0f, 1.0f, 1.0f, 1.0f);
 
 		while (!glfwWindowShouldClose(window)) {
 		processInput(window);
+		glBegin(GL_TRIANGLES);
+		glVertex2f(-0.5f, -0.5f);
+		glVertex2f(0.5f, -0.5f);
+		glVertex2f(0.0f, 0.5f);
+		glEnd();
+		
 
 		// Clear the color buffer (this fills the window with the clear color)
 		glClear(GL_COLOR_BUFFER_BIT);
